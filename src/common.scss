@@ -1,0 +1,55 @@
+@use "sass:map";
+@use '@angular/material' as mat;
+@use "color-palette";
+//@import "styles/button-custom";
+
+// Importa as fontes extras para o projeto
+@font-face {
+  font-family: Nunito;
+  src: url('/src/assets/fonts/Nunito-Regular.ttf') format("opentype");
+}
+
+@font-face {
+  font-family: OpenSans;
+  src: url('/src/assets/fonts/OpenSans-Regular.ttf') format("opentype");
+}
+
+// Define a tipografia padrão do projeto
+$custom-typography: mat.define-typography-config(
+  $headline-6: mat.define-typography-level(112px, 116px, 400, $letter-spacing: -110em),
+  $headline-5: mat.define-typography-level(56px, 60px, 400, $letter-spacing: -0em),
+  $headline-4: mat.define-typography-level(45px, 52px, 400, 'OpenSans' ,$letter-spacing: -0em),
+  $headline-3: mat.define-typography-level(34px, 40px, 400, 'OpenSans'),
+  $headline-2: mat.define-typography-level(32px, 40px, 700, 'OpenSans'),
+  $headline-1: mat.define-typography-level(28px, 34px, 700, 'OpenSans'),
+  $subtitle-1: mat.define-typography-level(22px, 34px, 400, 'OpenSans'),
+  $body-2: mat.define-typography-level(16px, 18px, 700, 'Nunito'),
+  $body-1: mat.define-typography-level(16px, 18px, 400, 'Nunito'),
+  $caption: mat.define-typography-level(14px, 18px, 400),
+  $button: mat.define-typography-level(14px, 34px, 700, 'Nunito'),
+);
+
+// Adiciona uma nova cor ao tema - Success
+$workshop-success: mat.define-palette(color-palette.$custom-success-color);
+
+// Faz um "merge" da cor extra com o tema
+@function apply-extra-colors($theme) {
+  @return map.deep-merge($theme, (
+    success: $workshop-success,
+    color: (
+      success: $workshop-success,
+    ),
+    typography: $custom-typography,
+
+  ));
+}
+
+// Mixin - um bloco de códigos CSS que serão executados sempre que chamado
+@mixin create-theme($workshop-theme) {
+  @include mat.all-component-themes($workshop-theme);
+  @include mat.button-typography($custom-typography);
+  // Set the default typography
+  @include mat.all-component-typographies($custom-typography);
+  @include mat.core();
+
+}

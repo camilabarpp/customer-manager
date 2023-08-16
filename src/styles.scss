@@ -1,4 +1,42 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+@use 'color-palette';
+@use 'common';
+@use "sass:map";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.custom-container {
+  @apply mx-8 my-10 min-h-[calc(100%_-_260px)];
+}
+
+@screen sm {
+  .custom-container {
+    @apply mx-[88px] my-[104px];
+  }
+}
+@screen lg {
+  .custom-container {
+    @apply mx-[140px] my-32 max-w-[1640px];
+  }
+}
+
+// Define as cores do tema
+$custom-primary-color: mat.define-palette(color-palette.$custom-primary-color);
+$custom-accent-color: mat.define-palette(color-palette.$custom-accent-color);
+$custom-warn-color: mat.define-palette(color-palette.$custom-warn-color);
+$custom-success-color: mat.define-palette(color-palette.$custom-success-color);
+
+// Define o tema com base nas cores padrão e na tipografia
+$custom-theme: mat.define-light-theme((
+  color: (
+    primary: $custom-primary-color,
+    accent: $custom-accent-color,
+    warn: $custom-warn-color,
+    success: $custom-success-color,
+  ),
+  typography: common.$custom-typography,
+));
+
+// Aplica a cor extra - Success
+$custom-theme: common.apply-extra-colors($custom-theme);
+
+//Generate theme
+@include common.create-theme($custom-theme);
