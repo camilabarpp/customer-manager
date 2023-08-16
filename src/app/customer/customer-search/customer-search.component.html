@@ -1,22 +1,40 @@
-<!-- customer-search.component.html -->
+<section *ngIf="customers$ | async as customers" class="container">
 <mat-card class="search-card">
-  <mat-card-content>
-    <mat-form-field appearance="outline" class="search-field">
-      <input matInput placeholder="Search by name" />
-      <button matSuffix mat-icon-button aria-label="Search">
-        <mat-icon>search</mat-icon>
-      </button>
-    </mat-form-field>
-  </mat-card-content>
-</mat-card>
+    <mat-card-content>
+      <mat-form-field appearance="outline" class="search-field">
+        <input matInput placeholder="Procure por um nome" />
+        <button matSuffix mat-icon-button aria-label="Search">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
 
-<mat-card class="results-card">
-  <mat-card-content>
-    <mat-list role="list">
-      <mat-list-item *ngFor="let customer of searchResults" role="listitem">
-        <div mat-line>{{ customer.name }}</div>
-        <div mat-line class="subline">{{ customer.email }}</div>
-      </mat-list-item>
-    </mat-list>
-  </mat-card-content>
-</mat-card>
+  <mat-card class="results-card">
+    <mat-card-content>
+      <table mat-table [dataSource]="customers">
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Nome</th>
+          <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)" *matCellDef="let customer">{{ customer.name }}</td>
+        </ng-container>
+
+        <!-- Type Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Tipo</th>
+          <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)" *matCellDef="let customer">{{ customer.type }}</td>
+        </ng-container>
+
+        <!-- CPF Column -->
+        <ng-container matColumnDef="telephone">
+          <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Telefone</th>
+          <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)" *matCellDef="let customer">{{ customer.telephones[0].number }}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row class="mat-body-1" *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</section>
+

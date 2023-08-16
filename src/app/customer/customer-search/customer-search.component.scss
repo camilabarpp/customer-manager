@@ -1,23 +1,42 @@
 /* customer-search.component.css */
-.search-card {
-  margin: 20px;
-  padding: 20px;
-}
+.container {
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 
-.search-field {
-  width: 100%;
-}
 
-.results-card {
-  margin: 20px;
-}
+  .search-card {
+    @media (min-width: 1200px) {
+      min-width: 800px;
+      margin: 20px 100px 20px 100px;
+    }
 
-.mat-list-item {
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 10px;
-}
+    @media (max-width: 1200px) {
+      width: 80%;
+      margin: 20px 36px 20px 36px;
+    }
+  }
 
-.subline {
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.54);
+  .search-field {
+    width: 100%;
+    padding-top: 12px;
+  }
+
+  .results-card {
+    @media (min-width: 1200px) {
+      min-width: 800px;
+      margin: 20px 100px 20px 100px;
+    }
+
+    @media (max-width: 1200px) {
+      width: 80%;
+      margin: 20px 36px 20px 36px;
+    }
+  }
+
+  .mat-list-item {
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+  }
 }

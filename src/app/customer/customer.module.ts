@@ -15,15 +15,15 @@ import {MatButtonModule} from "@angular/material/button";
     CustomerSearchComponent,
     CustomerRegisterComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MaterialModule,
-    CustomerRoutingModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule
-  ]
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        MaterialModule,
+        CustomerRoutingModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+    ]
 })
 export class CustomerModule { }

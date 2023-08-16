@@ -5,13 +5,11 @@
 
 // Importa as fontes extras para o projeto
 @font-face {
-  font-family: Nunito;
-  src: url('/src/assets/fonts/Nunito-Regular.ttf') format("opentype");
+  font-family: 'Nunito', sans-serif;
 }
 
 @font-face {
-  font-family: OpenSans;
-  src: url('/src/assets/fonts/OpenSans-Regular.ttf') format("opentype");
+  font-family: 'Open Sans', sans-serif;
 }
 
 // Define a tipografia padrão do projeto

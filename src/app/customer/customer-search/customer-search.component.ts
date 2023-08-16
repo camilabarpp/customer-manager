@@ -1,5 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {CustomerStore} from "../../store/customer.store";
+import { Component, OnInit } from '@angular/core';
+import { CustomerStore } from '../../store/customer.store';
+import { Observable } from 'rxjs';
+import { Customer } from '../../store/customer.model';
 
 @Component({
   selector: 'app-customer-search',
@@ -7,16 +9,19 @@ import {CustomerStore} from "../../store/customer.store";
   styleUrls: ['./customer-search.component.scss']
 })
 export class CustomerSearchComponent implements OnInit {
-  searchResults: any[] = [
-    { name: 'John Doe', email: 'john@example.com' },
-    { name: 'Jane Smith', email: 'jane@example.com' },
-    // ... Add more customer objects here
-  ];
-
-  constructor(private _store: CustomerStore) {
+  customers$!: Observable<Customer[] | undefined>;
+  displayedColumns: string[] = ['name', 'type', 'telephone'];
+  constructor(private _store: CustomerStore, private _service: CustomerStore) {
+    this.customers$ = this._store.customers$;
   }
 
   ngOnInit(): void {
     this._store.listAllCustomers();
+  }
+
+  editCustomer(customerId: number): void {
+    // Navegue para a rota de edição, passando o ID do cliente como parâmetro
+    // this._router.navigate(['/edit-customer', customerId]);
+    console.log(customerId);
   }
 }

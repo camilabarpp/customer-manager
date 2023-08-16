@@ -6,6 +6,7 @@ import {CustomerService} from "../service/customer.service";
 
 export interface CustomerState {
     customerState?: Customer;
+    customerStates?: Customer[];
 }
 
 const initialState: CustomerState = {};
@@ -15,20 +16,14 @@ export class CustomerStore extends ComponentStore<CustomerState> implements OnDe
     constructor(private customerService: CustomerService) {
         super(initialState);
     }
-    readonly listAllCustomers = this.effect((request$: Observable<void>) => {
-        return request$.pipe(
-            switchMap(() =>
-                this.customerService.listAllCustomers.pipe(
-                    tapResponse(response => {
-                        console.log(response);
-                        this.setCustomers(response);
-                    },
-                (error: any) => console.error(error)
-                    )
-                )
-            )
-        );
-    });
+
+    readonly customers$ = this.select(state => state.customerStates);
+
+    readonly listAllCustomers = this.effect<void>(() =>
+        this.customerService.listAllCustomers.pipe(
+            tap(customerStates => this.patchState({ customerStates }))
+        )
+    );
 
     readonly getACustomerById = this.effect((request$: Observable<string>) => {
         return request$.pipe(
@@ -75,4 +70,8 @@ export class CustomerStore extends ComponentStore<CustomerState> implements OnDe
     readonly setCustomer = this.updater((state, customer: Customer | undefined)  => {
         return {...state, customer};
     });
+
+    getCustomers(): Observable<Customer[] | undefined> {
+        return this.select(state => state.customerStates);
+    }
 }

@@ -12,7 +12,6 @@ export interface Customer {
 }
 
 interface Telephone {
-    ddd: string;
     number: string;
 }
 

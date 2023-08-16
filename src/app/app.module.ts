@@ -17,7 +17,7 @@ import {CustomerStore} from "./store/customer.store";
     AppRoutingModule,
     BrowserAnimationsModule,
     CustomerModule,
-      HttpClientModule
+    HttpClientModule
   ],
   providers: [CustomerStore],
   bootstrap: [AppComponent]

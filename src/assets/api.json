@@ -2,16 +2,14 @@
   {
     "id": 1,
     "name": "João Silva",
-    "type": {
-      "PF": "Pessoa Física"
-    },
+    "type": "Pessoa Física",
     "cpf": "123.456.789-00",
     "rg": "987654321",
     "registerDate": "2023-08-01",
     "isActive": true,
     "telephones": [
-      { "ddd": "11", "numero": "12345678" },
-      { "ddd": "11", "numero": "87654321" }
+      { "number": "11 12345678" },
+      { "number": "11 87654321" }
     ]
   },
   {
@@ -23,8 +21,8 @@
     "registerDate": "2023-08-02",
     "isActive": true,
     "telephones": [
-      { "ddd": "21", "numero": "11112222" },
-      { "ddd": "21", "numero": "33334444" }
+      { "number": "11 12345678" },
+      { "number": "11 87654321" }
     ]
   },
   {
@@ -36,8 +34,8 @@
     "registerDate": "2023-08-03",
     "isActive": false,
     "telephones": [
-      { "ddd": "31", "numero": "55556666" },
-      { "ddd": "31", "numero": "77778888" }
+      { "number": "11 12345678" },
+      { "number": "11 87654321" }
     ]
   },
   {
@@ -49,8 +47,8 @@
     "registerDate": "2023-08-04",
     "isActive": false,
     "telephones": [
-      { "ddd": "41", "numero": "99990000" },
-      { "ddd": "41", "numero": "22223333" }
+      { "number": "11 12345678" },
+      { "number": "11 87654321" }
     ]
   },
     {
@@ -62,8 +60,8 @@
         "registerDate": "2023-08-05",
         "isActive": true,
         "telephones": [
-        { "ddd": "51", "numero": "44445555" },
-        { "ddd": "51", "numero": "66667777" }
+          { "number": "11 12345678" },
+          { "number": "11 87654321" }
         ]
     },
     {
@@ -75,8 +73,8 @@
         "registerDate": "2023-08-06",
         "isActive": true,
         "telephones": [
-        { "ddd": "61", "numero": "88889999" },
-        { "ddd": "61", "numero": "00001111" }
+          { "number": "11 12345678" },
+          { "number": "11 87654321" }
         ]
     },
     {
@@ -88,8 +86,8 @@
         "registerDate": "2023-08-07",
         "isActive": false,
         "telephones": [
-        { "ddd": "71", "numero": "22223333" },
-        { "ddd": "71", "numero": "44445555" }
+          { "number": "11 12345678" },
+          { "number": "11 87654321" }
         ]
     },
     {
@@ -101,8 +99,8 @@
         "registerDate": "2023-08-08",
         "isActive": false,
         "telephones": [
-        { "ddd": "81", "numero": "66667777" },
-        { "ddd": "81", "numero": "88889999" }
+          { "number": "11 12345678" },
+          { "number": "11 87654321" }
         ]
     },
     {
@@ -114,8 +112,8 @@
         "registerDate": "2023-08-09",
         "isActive": true,
         "telephones": [
-        { "ddd": "91", "numero": "00001111" },
-        { "ddd": "91", "numero": "22223333" }
+          { "number": "11 12345678" },
+          { "number": "11 87654321" }
         ]
     },
     {
@@ -127,8 +125,8 @@
         "registerDate": "2023-08-10",
         "isActive": true,
         "telephones": [
-        { "ddd": "01", "numero": "44445555" },
-        { "ddd": "01", "numero": "66667777" }
+          { "number": "11 12345678" },
+          { "number": "11 87654321" }
         ]
     }
 ]
