@@ -5,6 +5,10 @@ import {CustomerRegisterComponent} from './customer-register/customer-register.c
 import {MaterialModule} from "../material/material.module";
 import {ReactiveFormsModule} from "@angular/forms";
 import {CustomerRoutingModule} from "./customer-routing.module";
+import {MatInputModule} from "@angular/material/input";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -15,7 +19,11 @@ import {CustomerRoutingModule} from "./customer-routing.module";
     CommonModule,
     ReactiveFormsModule,
     MaterialModule,
-    CustomerRoutingModule
+    CustomerRoutingModule,
+    MatButtonModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule
   ]
 })
 export class CustomerModule { }
