@@ -7,7 +7,7 @@ import {Observable, tap} from "rxjs";
   providedIn: 'root'
 })
 export class CustomerService {
-  private URL: string = 'assets/api.json';
+  private URL: string = 'api/customers';
 
   constructor(private _http: HttpClient) { }
 

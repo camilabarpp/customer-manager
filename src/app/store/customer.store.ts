@@ -21,7 +21,11 @@ export class CustomerStore extends ComponentStore<CustomerState> implements OnDe
 
     readonly listAllCustomers = this.effect<void>(() =>
         this.customerService.listAllCustomers.pipe(
-            tap(customerStates => this.patchState({ customerStates }))
+            tap(customerStates => {
+              this.patchState({ customerStates });
+              console.log(customerStates)
+            })
+
         )
     );
 

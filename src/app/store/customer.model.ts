@@ -8,7 +8,7 @@ export interface Customer {
     ie?: string;
     registerDate?: Date;
     isActive: boolean;
-    telephones: Telephone[];
+    phoneNumbers: Telephone[];
 }
 
 interface Telephone {
