@@ -1,5 +1,5 @@
 export interface Customer {
-    id?: number;
+    id: string;
     name: string;
     type: TypeCustomer;
     cpf?: string;
@@ -7,15 +7,15 @@ export interface Customer {
     rg?: string;
     ie?: string;
     registerDate?: Date;
-    isActive: boolean;
     phoneNumbers: Telephone[];
 }
 
-interface Telephone {
+export interface Telephone {
+    id?: string;
     number: string;
 }
 
-enum TypeCustomer {
-    PF = 'Pessoa Física',
-    PJ = 'Pessoa Jurídica'
+export enum TypeCustomer {
+    PF = 'PF',
+    PJ = 'PJ'
 }

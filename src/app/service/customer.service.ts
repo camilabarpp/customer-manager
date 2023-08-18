@@ -18,4 +18,8 @@ export class CustomerService {
   findACustomerById(id: string): Observable<Customer> {
     return this._http.get<Customer>(`${this.URL}/${id}`);
   }
+
+  createCustomer(customer: Customer): Observable<Customer> {
+    return this._http.post<Customer>(this.URL, customer);
+  }
 }

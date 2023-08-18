@@ -14,7 +14,7 @@
 
 // Define a tipografia padrão do projeto
 $custom-typography: mat.define-typography-config(
-  $headline-6: mat.define-typography-level(112px, 116px, 400, $letter-spacing: -110em),
+  $headline-6: mat.define-typography-level(112px, 116px, 400, $letter-spacing: -0em),
   $headline-5: mat.define-typography-level(56px, 60px, 400, $letter-spacing: -0em),
   $headline-4: mat.define-typography-level(45px, 52px, 400, 'OpenSans' ,$letter-spacing: -0em),
   $headline-3: mat.define-typography-level(34px, 40px, 400, 'OpenSans'),

@@ -14,25 +14,23 @@
     <mat-card-content>
       <table mat-table [dataSource]="customers">
 
-        <!-- Name Column -->
         <ng-container matColumnDef="name">
           <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Nome</th>
           <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)" *matCellDef="let customer">{{ customer.name }}</td>
         </ng-container>
 
-        <!-- Type Column -->
         <ng-container matColumnDef="type">
           <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Tipo</th>
           <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)" *matCellDef="let customer">{{ customer.type }}</td>
         </ng-container>
 
-        <!-- CPF Column -->
         <ng-container matColumnDef="telephone">
           <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Telefone</th>
-          <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)" *matCellDef="let customer">{{ customer.phoneNumbers[0].number }}</td>
+          <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)" *matCellDef="let customer">{{ customer.phoneNumbers[0]?.number }}</td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row class="mat-body-1" *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row class="mat-body-1 row-table" *matRowDef="let row; columns: displayedColumns;"></tr>
+
       </table>
     </mat-card-content>
   </mat-card>

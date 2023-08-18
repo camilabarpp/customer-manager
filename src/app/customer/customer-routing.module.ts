@@ -6,6 +6,7 @@ import {CustomerRegisterComponent} from "./customer-register/customer-register.c
 const routes: Routes = [
   { path: 'search', component: CustomerSearchComponent },
   { path: 'register', component: CustomerRegisterComponent },
+  { path: 'edit/:id', component: CustomerRegisterComponent },
   // Defina outras rotas ou roteamentos internos aqui
 ];
 
