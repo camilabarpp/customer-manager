@@ -27,7 +27,6 @@ export class CustomerStore extends ComponentStore<CustomerState> {
     super(initialState);
   }
 
-  readonly customer$: Observable<Customer | undefined> = this.select(state => state.customer);
   readonly customers$: Observable<Customer[] | undefined> = this.select(state => state.customers);
 
   readonly listAllCustomers = this.effect<void>(() =>
@@ -69,6 +68,7 @@ export class CustomerStore extends ComponentStore<CustomerState> {
             this._snackBar.open('Cliente criado com sucesso!', 'Fechar', {
               duration: 5000,
             });
+            this.listAllCustomers();
           }),
           catchError((error) => {
             console.error('Error creating customer:', error);
@@ -100,7 +100,6 @@ export class CustomerStore extends ComponentStore<CustomerState> {
             }
           ),
           catchError(() => {
-            // this.setErrors(new Error('Erro desconhecido.'));
             return EMPTY;
           })
         )
@@ -126,7 +125,6 @@ export class CustomerStore extends ComponentStore<CustomerState> {
             }
           ),
           catchError(() => {
-            // this.setErrors(new Error('Erro desconhecido.'));
             return EMPTY;
           })
         )
@@ -142,7 +140,6 @@ export class CustomerStore extends ComponentStore<CustomerState> {
               this._snackBar.open('Cliente excluído com sucesso!', 'Fechar', {
                 duration: 5000,
               });
-              // this.onCancel();
             },
             (error: HttpErrorResponse) => {
               this._snackBar.open('Erro ao excluir cliente!', 'Fechar', {
@@ -152,7 +149,6 @@ export class CustomerStore extends ComponentStore<CustomerState> {
             }
           ),
           catchError(() => {
-            // this.setErrors(new Error('Erro desconhecido.'));
             return EMPTY;
           })
         )
@@ -160,17 +156,23 @@ export class CustomerStore extends ComponentStore<CustomerState> {
     )
   });
 
-  readonly setCustomers = this.updater((state, customers: Customer[] | undefined) => {
-    return {...state, customers};
-  });
+  readonly getCustomerByName = this.effect<string>((customerName$) =>
+    customerName$.pipe(
+      switchMap((customerName) =>
+        this._service.getCustomerByName(customerName).pipe(
+          tapResponse((customer) => {
+              this.patchState({customers: customer});
+              console.log(customer)
+            },
+            (error: any) => console.error(error)
+          )
+        )
+      )
+    ));
 
   readonly setCustomer = this.updater((state, customer: Customer | undefined) => {
     return {...state, customer};
   });
-
-  getCustomers(): Observable<Customer[] | undefined> {
-    return this.select(state => state.customers);
-  }
 
   getCustomer(): Observable<Customer | undefined> {
     return this.select(state => state.customer);

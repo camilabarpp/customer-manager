@@ -1,14 +1,17 @@
 <section *ngIf="customers$ | async as customers" class="container">
   <mat-card class="search-card">
     <mat-card-content>
-      <mat-form-field appearance="outline" class="search-field">
-        <input matInput placeholder="Procure por um nome"/>
-        <button matSuffix mat-icon-button aria-label="Search">
-          <mat-icon>search</mat-icon>
-        </button>
-      </mat-form-field>
+      <form [formGroup]="searchForm" (ngSubmit)="searchCustomers()">
+        <mat-form-field appearance="outline" class="search-field">
+          <input matInput placeholder="Procure por um nome" formControlName="searchInput"/>
+          <button matSuffix mat-icon-button aria-label="Search" type="submit">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
     </mat-card-content>
   </mat-card>
+
 
   <mat-card class="results-card">
     <mat-card-content>
@@ -30,9 +33,7 @@
           <ng-container matColumnDef="telephone">
             <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Telefone</th>
             <td mat-cell class="mat-body-1" *matCellDef="let customer">
-              <div *ngFor="let phone of customer.phoneNumbers">
-                {{ phone.number }}
-              </div>
+              <div>{{ customer.phoneNumbers[0]?.number }}</div>
             </td>
           </ng-container>
 
@@ -44,7 +45,6 @@
               </button>
             </td>
           </ng-container>
-
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
           <tr mat-row class="mat-body-1 row-table" *matRowDef="let row; columns: displayedColumns;"></tr>
