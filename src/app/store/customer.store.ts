@@ -45,7 +45,6 @@ export class CustomerStore extends ComponentStore<CustomerState> {
             this._snackBar.open('Cliente criado com sucesso!', 'Fechar', {
                 duration: 2000,
             });
-            console.log('created\n' + customer)
           }),
           catchError((error) => {
             console.error('Error creating customer:', error);
@@ -59,32 +58,6 @@ export class CustomerStore extends ComponentStore<CustomerState> {
     )
   );
 
-  readonly updateCustomer = this.effect((request$: Observable<[string, Customer]>) => {
-    return request$.pipe(
-      switchMap((request) =>
-        this._service.updateCustomer(request[0], request[1]).pipe(
-          tapResponse((response) => {
-            this._snackBar.open('Cliente atualizado com sucesso!', 'Fechar', {
-                duration: 2000,
-            });
-            this.onCancel();
-            console.log('updated\n' + response)
-          },
-            (error: HttpErrorResponse) => {
-              this._snackBar.open('Erro ao atualizar cliente!', 'Fechar', {
-                  duration: 2000,
-              });
-            }
-          ),
-          catchError(() => {
-            // this.setErrors(new Error('Erro desconhecido.'));
-            return EMPTY;
-          })
-        )
-      )
-    )
-  });
-
   readonly updateCustomerPf = this.effect((request$: Observable<[string, Customer]>) => {
     return request$.pipe(
       switchMap((request) =>
@@ -93,7 +66,7 @@ export class CustomerStore extends ComponentStore<CustomerState> {
               this._snackBar.open('Cliente atualizado com sucesso!', 'Fechar', {
                 duration: 2000,
               });
-              // this.onCancel();
+              this.onCancel();
             },
             (error: HttpErrorResponse) => {
               this._snackBar.open('Erro ao atualizar cliente!', 'Fechar', {
@@ -152,29 +125,6 @@ export class CustomerStore extends ComponentStore<CustomerState> {
       )
     )
   ));
-
-  readonly fetchCustomerById = this.effect<string>((id$) =>
-    id$.pipe(
-      switchMap((id) =>
-        this._service.findACustomerById(id).pipe(
-          tapResponse(
-            (response) => {
-              this.setCustomer(response)
-              console.log(response)
-            },
-            (error: HttpErrorResponse) => {
-              console.log('deu erro --');
-              // this.setErrors(error);
-            }
-          ),
-          catchError(() => {
-            // this.setErrors(new Error('Erro desconhecido.'));
-            return EMPTY;
-          })
-        )
-      )
-    )
-  );
 
     readonly setCustomers = this.updater((state, customers: Customer[] | undefined)  => {
         return {...state, customers};

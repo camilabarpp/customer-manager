@@ -48,3 +48,22 @@ button {
 mat-form-field {
   width: 100%;
 }
+
+.title {
+  text-align: center;
+  color: #8b1d9b;
+
+  @media (max-width: 600px) {
+    margin: 10px 0;
+  }
+
+  @media (min-width: 600px) {
+    margin: 20px 0;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

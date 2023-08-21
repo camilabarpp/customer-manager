@@ -165,11 +165,11 @@ export class CustomerEditComponent implements OnInit {
         phoneNumbers: this.phoneNumbers.value.map((number: string) => ({ number: number }))
       };
 
-      // if (customerData.type === 'PF') {
-      //   this._store.updateCustomerPf([id!, customerData]);
-      // } else {
-      //   this._store.updateCustomerPj([id!, customerData]);
-      // }
+      if (customerData.type === 'PF') {
+        this._store.updateCustomerPf([id!, customerData]);
+      } else {
+        this._store.updateCustomerPj([id!, customerData]);
+      }
 
       console.log(customerData);
     }
@@ -183,7 +183,12 @@ export class CustomerEditComponent implements OnInit {
   addPhoneNumber() {
     const control = this._formBuilder.control('', Validators.required);
     this.phoneNumbers.push(control);
+    // Update the customer's phoneNumbers array with the new empty entry
+    const customerPhoneNumbers = this.customer.phoneNumbers;
+    customerPhoneNumbers.push({ number: '' });
+    this.customer.phoneNumbers = customerPhoneNumbers;
   }
+
 
   removePhoneNumber(index: number) {
     const phoneNumbersArray = this.form.get('phoneNumbers') as FormArray;

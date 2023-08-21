@@ -12,7 +12,8 @@
 
   <mat-card class="results-card">
     <mat-card-content>
-      <table mat-table [dataSource]="customers">
+      <ng-container *ngIf="customers.length > 0; else noCustomers">
+        <table mat-table [dataSource]="customers">
 
         <ng-container matColumnDef="name">
           <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Nome</th>
@@ -36,13 +37,23 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row class="mat-body-1 row-table" *matRowDef="let row; columns: displayedColumns;"></tr>
 
-      </table>
+        </table>
+        <button mat-raised-button color="primary" class="add-button" (click)="onAddCustomer()">
+          <mat-icon>add</mat-icon>
+          <span>Adicionar</span>
+        </button>
+      </ng-container>
 
-      <button mat-raised-button color="primary" class="add-button" (click)="onAddCustomer()">
-        <mat-icon>add</mat-icon>
-        <span>Adicionar</span>
-      </button>
+      <ng-template #noCustomers>
+        <div class="no-customers-message">
+          <span>Nenhum cliente cadastrado.</span>
+        </div>
+
+        <button mat-raised-button color="primary" class="add-button" (click)="onAddCustomer()">
+          <mat-icon>add</mat-icon>
+          <span>Adicionar</span>
+        </button>
+      </ng-template>
     </mat-card-content>
   </mat-card>
 </section>
-

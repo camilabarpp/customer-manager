@@ -42,8 +42,20 @@
 
   .row-table {
     cursor: pointer;
-
     transform: translateY(-3px);
     transition: transform 0.2s ease;
+  }
+
+  .add-button {
+    margin: 20px 0px 20px 0px;
+  }
+
+  .no-customers-message {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 20px;
   }
 }

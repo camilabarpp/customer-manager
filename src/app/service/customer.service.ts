@@ -24,10 +24,6 @@ export class CustomerService {
     return this._http.post<Customer>(this.URL, customer);
   }
 
-  updateCustomer(id: string, customer: Customer): Observable<Customer> {
-    return this._http.put<Customer>(`${this.URL}/${id}`, customer);
-  }
-
   updateCustomerPf(id: string, customer: Customer): Observable<Customer> {
     return this._http.patch<Customer>(`${this.URL}/pf/${id}`, customer);
   }

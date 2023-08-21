@@ -1,11 +1,18 @@
 .customer-form {
   max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 600px) {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  @media (min-width: 600px) {
+    margin: 20px auto;
+    padding: 20px;  }
 }
 
 mat-radio-button,
@@ -39,12 +46,25 @@ button {
   display: flex;
 }
 
-:host ::ng-deep .mat-mdc-radio-button .mdc-form-field {
-  padding-bottom: 20px;
-
-  height: 100px;
-}
-
 mat-form-field {
   width: 100%;
+}
+
+.title {
+  text-align: center;
+  color: #8b1d9b;
+
+  @media (max-width: 600px) {
+    margin: 10px 0;
+  }
+
+  @media (min-width: 600px) {
+    margin: 20px 0;
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 }

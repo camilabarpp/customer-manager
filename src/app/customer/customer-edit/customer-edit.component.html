@@ -1,6 +1,6 @@
 <section *ngIf="customer$ | async as customer">
-  <h2 class="mat-headline-2">Cadastrar Novo Cliente</h2>
   <form [formGroup]="form" class="customer-form">
+  <h2 class="mat-headline-2 title">Cadastrar Novo Cliente</h2>
 
     <mat-radio-group formControlName="type">
       <mat-radio-button *ngFor="let type of typeOptions" [value]="type">{{ type }}</mat-radio-button>
@@ -52,7 +52,9 @@
       </div>
     </div>
 
-    <button mat-raised-button color="primary" type="submit" (click)="submitForm()">Salvar</button>
+   <div class="buttons">
     <button mat-raised-button color="warn" type="button" (click)="cancel()">Cancelar</button>
+     <button mat-raised-button color="primary" type="submit" (click)="submitForm()">Salvar</button>
+   </div>
   </form>
 </section>

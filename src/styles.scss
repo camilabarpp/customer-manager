@@ -42,5 +42,5 @@ $custom-theme: common.apply-extra-colors($custom-theme);
 @include common.create-theme($custom-theme);
 
 body {
-  //background-color: #1b1f28;
+  background: linear-gradient(#e66465, #9198e5) no-repeat center center fixed;
 }

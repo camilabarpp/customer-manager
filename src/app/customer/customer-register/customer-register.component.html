@@ -1,6 +1,7 @@
 <section>
-  <h2 class="mat-headline-2">Cadastrar</h2>
   <form [formGroup]="form" (ngSubmit)="submitForm()" class="customer-form">
+    <h2 class="mat-subtitle-1 title">Cadastrar um novo cliente</h2>
+
     <mat-radio-group formControlName="type">
       <mat-radio-button *ngFor="let type of typeOptions" [value]="type">{{ type }}</mat-radio-button>
     </mat-radio-group>
@@ -40,11 +41,13 @@
           <input matInput [placeholder]="'Telephone ' + (i + 1)" [formControlName]="i">
         </mat-form-field>
       </div>
-      <button mat-button type="button" (click)="addPhoneNumber()">Add Phone</button>
+      <button mat-raised-button color="primary" class="add-telephone-button" (click)="addPhoneNumber()">Adicionar Telefone</button>
     </div>
 
-    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Salvar</button>
-    <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancelar</button>
+    <div class="buttons">
+      <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancelar</button>
+      <button mat-raised-button color="primary" type="submit" (click)="submitForm()" [disabled]="!form.valid">Salvar</button>
+    </div>
   </form>
 
 </section>
