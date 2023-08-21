@@ -39,7 +39,7 @@ export class CustomerStore extends ComponentStore<CustomerState> {
         (error: any) => {
           console.error(error);
             this._dialog.open(ErrorDialogComponent, {
-              data: error,
+              data: 'Erro ao carregar clientes!'
             });
         }
       )
