@@ -1,27 +1,57 @@
-# ClientManagerProject
+# Customer Manager
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.0.
+Customer Manager é um aplicativo de gerenciamento de clientes desenvolvido com Angular no front-end e Java Spring Boot no back-end. Ele permite que você cadastre, visualize, atualize e exclua informações de clientes, incluindo seus números de telefone. Este documento fornece uma visão geral do projeto, instruções de instalação e uso, além de informações sobre como contribuir.
 
-## Development server
+## Conteúdo
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Visão Geral](#visão-geral)
+- [Tecnologias](#tecnologias)
+- [Instalação](#instalação)
+- [Uso](#uso)
+- [Contribuição](#contribuição)
 
-## Code scaffolding
+## Visão Geral
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+O Customer Manager é um sistema completo de gerenciamento de clientes, permitindo que os usuários executem as seguintes operações:
 
-## Build
+- Cadastro de clientes, incluindo nome, tipo (PF ou PJ), CPF, CNPJ, RG, IE e números de telefone.
+- Visualização de informações detalhadas do cliente.
+- Atualização das informações do cliente, incluindo a adição ou remoção de números de telefone.
+- Exclusão de clientes do sistema.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+O projeto é dividido em duas partes: o front-end desenvolvido em Angular e o back-end em Java Spring Boot. Isso permite uma separação clara entre a interface do usuário e a lógica de negócios.
 
-## Running unit tests
+## Tecnologias
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+- Angular: Framework de front-end para a criação de interfaces de usuário modernas e responsivas.
+- Java Spring Boot: Framework de back-end para o desenvolvimento de aplicativos Java robustos.
+- Banco de Dados (Banco de dados de sua escolha, como MySQL, PostgreSQL, etc.)
+- RxJS: Biblioteca reativa para programação assíncrona.
+- TypeScript: Superset do JavaScript usado no desenvolvimento Angular.
+- HTML e CSS: Linguagens básicas para a construção da interface do usuário.
 
-## Running end-to-end tests
+## Instalação
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+1. Clone o repositório: `git clone https://github.com/camilabarpp/customer-manager-frontend.git`
+3. Instale as dependências do front-end: `npm install`
+4. Clone o repositório do back-end: `git clone https://github.com/camilabarpp/customer-manager-backend.git`
+5. Importe o projeto do back-end em sua IDE preferida e configure o banco de dados.
+6. Inicie o back-end.
 
-## Further help
+## Uso
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. Certifique-se de que o back-end está em execução.
+2. Inicie o aplicativo: `npm start`
+3. Abra seu navegador e acesse `http://localhost:4200`.
+
+A partir daqui, você poderá usar as diferentes funcionalidades do Customer Manager, como cadastrar, visualizar, atualizar e excluir clientes.
+
+## Contribuição
+
+Contribuições são bem-vindas! Se você deseja contribuir para o projeto, siga estas etapas:
+
+1. Faça um fork deste repositório.
+2. Crie uma nova branch para sua feature ou correção: `git checkout -b minha-feature`
+3. Faça suas alterações e commit: `git commit -m 'Adiciona nova feature'`
+4. Faça um push para a branch: `git push origin minha-feature`
+5. Abra um Pull Request neste repositório.
