@@ -1,8 +1,8 @@
 <section *ngIf="customers$ | async as customers" class="container">
-<mat-card class="search-card">
+  <mat-card class="search-card">
     <mat-card-content>
       <mat-form-field appearance="outline" class="search-field">
-        <input matInput placeholder="Procure por um nome" />
+        <input matInput placeholder="Procure por um nome"/>
         <button matSuffix mat-icon-button aria-label="Search">
           <mat-icon>search</mat-icon>
         </button>
@@ -15,27 +15,39 @@
       <ng-container *ngIf="customers.length > 0; else noCustomers">
         <table mat-table [dataSource]="customers">
 
-        <ng-container matColumnDef="name">
-          <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Nome</th>
-          <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)" *matCellDef="let customer">{{ customer.name }}</td>
-        </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Nome</th>
+            <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)"
+                *matCellDef="let customer">{{ customer.name }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="type">
-          <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Tipo</th>
-          <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)" *matCellDef="let customer">{{ customer.type }}</td>
-        </ng-container>
+          <ng-container matColumnDef="type">
+            <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Tipo</th>
+            <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)"
+                *matCellDef="let customer">{{ customer.type }}</td>
+          </ng-container>
 
-        <ng-container matColumnDef="telephone">
-          <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Telefone</th>
-          <td mat-cell class="mat-body-1" *matCellDef="let customer">
-            <div *ngFor="let phone of customer.phoneNumbers">
-              {{ phone.number }}
-            </div>
-          </td>
-        </ng-container>
+          <ng-container matColumnDef="telephone">
+            <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Telefone</th>
+            <td mat-cell class="mat-body-1" *matCellDef="let customer">
+              <div *ngFor="let phone of customer.phoneNumbers">
+                {{ phone.number }}
+              </div>
+            </td>
+          </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row class="mat-body-1 row-table" *matRowDef="let row; columns: displayedColumns;"></tr>
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell class="mat-body-2" *matHeaderCellDef></th>
+            <td mat-cell class="mat-body-1" *matCellDef="let customer">
+              <button mat-icon-button matTooltip="Delete" (click)="deleteCustomer(customer.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row class="mat-body-1 row-table" *matRowDef="let row; columns: displayedColumns;"></tr>
 
         </table>
         <button mat-raised-button color="primary" class="add-button" (click)="onAddCustomer()">

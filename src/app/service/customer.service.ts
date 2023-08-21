@@ -31,4 +31,8 @@ export class CustomerService {
   updateCustomerPj(id: string, customer: Customer): Observable<Customer> {
     return this._http.patch<Customer>(`${this.URL}/pj/${id}`, customer);
   }
+
+  deleteCustomer(id: number): Observable<void> {
+    return this._http.delete<void>(`${this.URL}/${id}`);
+  }
 }

@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 })
 export class CustomerSearchComponent implements OnInit {
   customers$!: Observable<Customer[] | undefined>;
-  displayedColumns: string[] = ['name', 'type', 'telephone'];
+  displayedColumns: string[] = ['name', 'type', 'telephone', 'actions'];
   constructor(
     private _store: CustomerStore,
     private _router: Router,
@@ -40,4 +40,8 @@ export class CustomerSearchComponent implements OnInit {
     this._router.navigate(['register']);
   }
 
+  deleteCustomer(id: number) {
+    this._store.deleteCustomer(id);
+    this.refresh();
+  }
 }
