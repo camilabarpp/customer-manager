@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {Customer} from "../store/customer.model";
+import {Customer} from "../store/model/customer.model";
 import {Observable, tap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CustomerService {
-  private URL: string = 'api/customers';
+   private URL: string = 'api/customers';
+  //private URL: string = 'assets/api.json';
 
   constructor(private _http: HttpClient) { }
 
@@ -21,5 +22,17 @@ export class CustomerService {
 
   createCustomer(customer: Customer): Observable<Customer> {
     return this._http.post<Customer>(this.URL, customer);
+  }
+
+  updateCustomer(id: string, customer: Customer): Observable<Customer> {
+    return this._http.put<Customer>(`${this.URL}/${id}`, customer);
+  }
+
+  updateCustomerPf(id: string, customer: Customer): Observable<Customer> {
+    return this._http.patch<Customer>(`${this.URL}/pf/${id}`, customer);
+  }
+
+  updateCustomerPj(id: string, customer: Customer): Observable<Customer> {
+    return this._http.patch<Customer>(`${this.URL}/pj/${id}`, customer);
   }
 }

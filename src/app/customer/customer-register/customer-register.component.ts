@@ -1,9 +1,10 @@
+import {Location} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {Customer, Telephone, TypeCustomer} from "../../store/customer.model";
 import {CustomerStore} from "../../store/customer.store";
-import {Observable, of} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
+import {TypeCustomer} from "../../store/model/customer.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-customer-register',
@@ -11,61 +12,50 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./customer-register.component.scss']
 })
 export class CustomerRegisterComponent implements OnInit {
-  customer$: Observable<Customer | undefined> | undefined;
   form!: FormGroup;
-  phoneNumber!: FormGroup;
   typeOptions: TypeCustomer[] = [TypeCustomer.PF, TypeCustomer.PJ];
 
   constructor(
     private _store: CustomerStore,
     private _formBuilder: FormBuilder,
     private _route: ActivatedRoute,
-  ) {}
+    private _location: Location,
+    private _snackBar: MatSnackBar) {}
+
+  ngOnInit() {
+    this.createForm();
+  }
 
   createForm(): void {
     this.form = this._formBuilder.group({
-      name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(15)]),
+      name: new FormControl('', [ Validators.minLength(3)]),
       type: new FormControl('', [Validators.required]),
-      cpf: new FormControl('', [Validators.required]),
-      cnpj: new FormControl('', [Validators.required]),
-      rg: new FormControl('', [Validators.required]),
-      ie: new FormControl('', [Validators.required]),
-      phoneNumbers: this._formBuilder.array([])
-    });
-  }
-
-  ngOnInit(): void {
-    this.customer$ = this._store.getCustomer();
-    this.initializeForm();
-  }
-
-  initializeForm() {
-    const id = this._route.snapshot.paramMap.get('id');
-    if (id) {
-      this._store.getCustomerById(id);
-
-      this._store.getCustomer().subscribe(
-        customer => {
-          if (customer) {
-            this.form?.patchValue({
-              name: customer.name,
-              type: customer.type,
-              cpf: customer.cpf,
-              cnpj: customer.cnpj,
-              rg: customer.rg,
-              ie: customer.ie,
-              phoneNumbers: customer.phoneNumbers.map((number: Telephone) => {
-                return this._formBuilder.group({
-                  id: [number.id],
-                  number: [number.number, Validators.required]
-                });
-              })
-            });
-          }
+      cpf: new FormControl('', [control => {
+        if (this.form?.get('type')?.value === 'PF') {
+          return Validators.required(control);
         }
-      );
-      this.createForm();
-    }
+        return null;
+      }]),
+      cnpj: new FormControl('', [control => {
+        if (this.form?.get('type')?.value === 'PJ') {
+          return Validators.required(control);
+        }
+        return null;
+      }]),
+      rg: new FormControl('', [control => {
+        if (this.form?.get('type')?.value === 'PF') {
+          return Validators.required(control);
+        }
+        return null;
+      }]),
+      ie: new FormControl('', [control => {
+        if (this.form?.get('type')?.value === 'PJ') {
+          return Validators.required(control);
+        }
+        return null;
+      }]),
+      phoneNumbers: this._formBuilder.array([], [Validators.required]),
+    });
   }
 
   submitForm() {
@@ -77,15 +67,16 @@ export class CustomerRegisterComponent implements OnInit {
       };
       console.log(customerData);
       this._store.createCustomer(customerData);
+      this.onCancel();
     }
   }
+
 
   get phoneNumbers() {
     return this.form.get('phoneNumbers') as FormArray;
   }
 
   addPhoneNumber() {
-    // this.phoneNumbers.push(this.createFormGroup());
     const control = this._formBuilder.control('', Validators.required);
     this.phoneNumbers.push(control);
   }
@@ -94,13 +85,11 @@ export class CustomerRegisterComponent implements OnInit {
     this.phoneNumbers.removeAt(index);
   }
 
-  initializePhoneNumbers(phoneNumbers: Telephone[]) : FormGroup[] {
-    return phoneNumbers.map((number: Telephone) => {
-      return this._formBuilder.group({
-        id: [number.id],
-        number: [number.number, Validators.required]
-      });
-    });
+  onCancel() {
+    this._location.back();
+    setTimeout(()=>{
+      location.reload();
+    }, 100);
+    this._store.listAllCustomers();
   }
-
 }

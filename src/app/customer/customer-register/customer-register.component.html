@@ -1,50 +1,50 @@
-<h2 class="mat-headline-4">Cadastrar Novo Cliente</h2>
-<form [formGroup]="form" (ngSubmit)="submitForm()" class="customer-form">
-  <mat-form-field appearance="outline">
-    <mat-label>Nome</mat-label>
-    <input matInput placeholder="Nome" formControlName="name">
-  </mat-form-field>
-
-  <mat-radio-group formControlName="type">
-    <mat-radio-button *ngFor="let type of typeOptions" [value]="type">{{ type }}</mat-radio-button>
-  </mat-radio-group>
-
-  <div *ngIf="form.get('type')?.value === 'PF'">
-    <mat-form-field appearance="outline">
-      <mat-label>CPF</mat-label>
-      <input matInput placeholder="Ex: 000.000.000-00" formControlName="cpf">
-    </mat-form-field>
+<section>
+  <h2 class="mat-headline-2">Cadastrar</h2>
+  <form [formGroup]="form" (ngSubmit)="submitForm()" class="customer-form">
+    <mat-radio-group formControlName="type">
+      <mat-radio-button *ngFor="let type of typeOptions" [value]="type">{{ type }}</mat-radio-button>
+    </mat-radio-group>
 
     <mat-form-field appearance="outline">
-      <mat-label>RG</mat-label>
-      <input matInput placeholder="Ex: 000.000.000-0" formControlName="rg">
-    </mat-form-field>
-  </div>
-
-  <div *ngIf="form.get('type')?.value === 'PJ'">
-    <mat-form-field appearance="outline">
-      <mat-label>CNPJ</mat-label>
-      <input matInput placeholder="Ex: 23793/0001-88" formControlName="cnpj">
+      <mat-label>Nome</mat-label>
+      <input matInput placeholder="Nome" formControlName="name">
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>IE</mat-label>
-      <input matInput formControlName="ie">
-    </mat-form-field>
-  </div>
-
-  <div formArrayName="phoneNumbers">
-    <ng-container *ngFor="let phoneNumber of phoneNumbers.controls; let i = index">
-      <mat-form-field appearance="outline" class="delete-button">
-        <mat-label>Telefone {{ i + 1 }}</mat-label>
-        <input matInput placeholder="Ex.: (00) 00000-0000" [formControlName]="i">
+    <div *ngIf="form.get('type')?.value === 'PF'">
+      <mat-form-field appearance="outline">
+        <mat-label>CPF</mat-label>
+        <input matInput placeholder="Ex: 000.000.000-00" formControlName="cpf">
       </mat-form-field>
-      <button mat-icon-button color="warn" class="delete-button" (click)="removePhoneNumber(i)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </ng-container>
-    <button mat-raised-button color="accent" (click)="addPhoneNumber()">Adicionar Telefone</button>
-  </div>
 
-  <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Salvar</button>
-</form>
+      <mat-form-field appearance="outline">
+        <mat-label>RG</mat-label>
+        <input matInput placeholder="Ex: 000.000.000-0" formControlName="rg">
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="form.get('type')?.value === 'PJ'">
+      <mat-form-field appearance="outline">
+        <mat-label>CNPJ</mat-label>
+        <input matInput placeholder="Ex: 23793/0001-88" formControlName="cnpj">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>IE</mat-label>
+        <input matInput formControlName="ie">
+      </mat-form-field>
+    </div>
+
+    <div formArrayName="phoneNumbers">
+      <div *ngFor="let phone of phoneNumbers.controls; let i = index">
+        <mat-form-field appearance="outline">
+          <input matInput [placeholder]="'Telephone ' + (i + 1)" [formControlName]="i">
+        </mat-form-field>
+      </div>
+      <button mat-button type="button" (click)="addPhoneNumber()">Add Phone</button>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Salvar</button>
+    <button mat-raised-button color="warn" type="button" (click)="onCancel()">Cancelar</button>
+  </form>
+
+</section>

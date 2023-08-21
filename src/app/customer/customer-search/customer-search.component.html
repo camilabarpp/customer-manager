@@ -26,12 +26,22 @@
 
         <ng-container matColumnDef="telephone">
           <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Telefone</th>
-          <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)" *matCellDef="let customer">{{ customer.phoneNumbers[0]?.number }}</td>
+          <td mat-cell class="mat-body-1" *matCellDef="let customer">
+            <div *ngFor="let phone of customer.phoneNumbers">
+              {{ phone.number }}
+            </div>
+          </td>
         </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row class="mat-body-1 row-table" *matRowDef="let row; columns: displayedColumns;"></tr>
 
       </table>
+
+      <button mat-raised-button color="primary" class="add-button" (click)="onAddCustomer()">
+        <mat-icon>add</mat-icon>
+        <span>Adicionar</span>
+      </button>
     </mat-card-content>
   </mat-card>
 </section>

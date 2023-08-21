@@ -1,18 +1,51 @@
 $custom-primary-color: (
-  50 : #f2f9ff,
-  100 : #d9edff,
-  200 : #b0d3ff,
-  300 : #87b8ff,
-  400 : #5ea0ff,
-  500 : #3588ff,
-  600 : #2f7de6,
-  700 : #2973cc,
-  800 : #2368b3,
-  900 : #155496,
+  50 : #f5f5f5,    // Alterado para cinza claro
+  100 : #e0e0e0,  // Alterado para cinza mais escuro
+  200 : #bdbdbd,
+  300 : #9e9e9e,
+  400 : #757575,
+  500 : #616161,
+  600 : #424242,
+  700 : #303030,
+  800 : #212121,  // Alterado para preto
+  900 : #000000,  // Alterado para preto absoluto
   A100 : #ffffff,
-  A200 : #c5daff,
-  A400 : #92b8ff,
-  A700 : #79a4ff,
+  A200 : #c5c5c5,
+  A400 : #9e9e9e,
+  A700 : #757575,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #ffffff,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$custom-accent-color: (
+  50 : #fff3e0,   // Alterado para laranja claro
+  100 : #ffcc80,  // Alterado para laranja mais claro
+  200 : #ffb74d,  // Alterado para laranja médio
+  300 : #ffa726,  // Alterado para laranja
+  400 : #ff9800,  // Alterado para laranja vibrante
+  500 : #ff5722,  // Alterado para laranja forte
+  600 : #f4511e,  // Alterado para laranja profundo
+  700 : #e64a19,  // Alterado para laranja muito profundo
+  800 : #d84315,  // Alterado para laranja escuro
+  900 : #bf360c,  // Alterado para laranja muito escuro
+  A100 : #ff9e80,
+  A200 : #ff6e40,
+  A400 : #ff3d00,
+  A700 : #dd2c00,
   contrast: (
     50 : #000000,
     100 : #000000,
@@ -31,54 +64,21 @@ $custom-primary-color: (
   )
 );
 
-$custom-accent-color: (
-  50 : #ffebf2,
-  100 : #ffbfdb,
-  200 : #ff8ec4,
-  300 : #ff5dab,
-  400 : #ff338f,
-  500 : #ff0073,
-  600 : #ff006a,
-  700 : #ff005f,
-  800 : #ff0055,
-  900 : #ff0043,
-  A100 : #ff96ff,
-  A200 : #ff63ff,
-  A400 : #ff30ff,
-  A700 : #ff17ff,
-  contrast: (
-    50 : #000000,
-    100 : #000000,
-    200 : #000000,
-    300 : #000000,
-    400 : #000000,
-    500 : #ffffff,
-    600 : #ffffff,
-    700 : #ffffff,
-    800 : #ffffff,
-    900 : #ffffff,
-    A100 : #000000,
-    A200 : #000000,
-    A400 : #000000,
-    A700 : #000000,
-  )
-);
-
 $custom-warn-color: (
-  50 : #fff3e8,
-  100 : #ffe2c6,
-  200 : #ffcea1,
-  300 : #ffba7b,
-  400 : #ffac5e,
-  500 : #ff9d42,
-  600 : #ff953c,
-  700 : #ff8b33,
-  800 : #ff812b,
-  900 : #ff6f1d,
-  A100 : #ffffff,
-  A200 : #ffffff,
-  A400 : #ffdece,
-  A700 : #ffcdb4,
+  50 : #ffebee,   // Alterado para vermelho claro
+  100 : #ffcdd2,  // Alterado para vermelho mais claro
+  200 : #ef9a9a,  // Alterado para vermelho médio
+  300 : #e57373,  // Alterado para vermelho
+  400 : #ef5350,  // Alterado para vermelho vibrante
+  500 : #f44336,  // Alterado para vermelho forte
+  600 : #e53935,  // Alterado para vermelho profundo
+  700 : #d32f2f,  // Alterado para vermelho muito profundo
+  800 : #c62828,  // Alterado para vermelho escuro
+  900 : #b71c1c,  // Alterado para vermelho muito escuro
+  A100 : #ff8a80,
+  A200 : #ff5252,
+  A400 : #ff1744,
+  A700 : #d50000,
   contrast: (
     50 : #000000,
     100 : #000000,
@@ -98,20 +98,20 @@ $custom-warn-color: (
 );
 
 $custom-success-color: (
-  50 : #e8faed,
-  100 : #c5f2d3,
-  200 : #9fe9b6,
-  300 : #78e098,
-  400 : #5bda82,
-  500 : #3ed36c,
-  600 : #38ce64,
-  700 : #30c859,
-  800 : #28c24f,
-  900 : #1bb73d,
-  A100 : #edfff1,
-  A200 : #baffc7,
-  A400 : #87ff9e,
-  A700 : #6eff89,
+  50 : #e8f5e9,   // Alterado para verde claro
+  100 : #c8e6c9,  // Alterado para verde mais claro
+  200 : #a5d6a7,  // Alterado para verde médio
+  300 : #81c784,  // Alterado para verde
+  400 : #66bb6a,  // Alterado para verde vibrante
+  500 : #4caf50,  // Alterado para verde forte
+  600 : #43a047,  // Alterado para verde profundo
+  700 : #388e3c,  // Alterado para verde muito profundo
+  800 : #2e7d32,  // Alterado para verde escuro
+  900 : #1b5e20,  // Alterado para verde muito escuro
+  A100 : #b9f6ca,
+  A200 : #69f0ae,
+  A400 : #00e676,
+  A700 : #00c853,
   contrast: (
     50 : #000000,
     100 : #000000,

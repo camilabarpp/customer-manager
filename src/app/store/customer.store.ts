@@ -1,9 +1,11 @@
-import {Customer} from "./customer.model";
+import {Location} from '@angular/common';
+import {Customer} from "./model/customer.model";
 import {Injectable, OnDestroy} from "@angular/core";
 import {ComponentStore, tapResponse} from "@ngrx/component-store";
-import {catchError, EMPTY, Observable, of, switchMap, tap} from "rxjs";
+import {catchError, EMPTY, Observable, of, retry, switchMap, tap} from "rxjs";
 import {CustomerService} from "../service/customer.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 export interface CustomerState {
   customer?: Customer;
@@ -14,7 +16,11 @@ const initialState: CustomerState = {};
 
 @Injectable()
 export class CustomerStore extends ComponentStore<CustomerState> {
-  constructor(private _service: CustomerService) {
+  constructor(
+    private _service: CustomerService,
+    private _snackBar: MatSnackBar,
+    private _location: Location
+  ) {
     super(initialState);
   }
 
@@ -36,17 +42,100 @@ export class CustomerStore extends ComponentStore<CustomerState> {
       switchMap((customer) =>
         this._service.createCustomer(customer).pipe(
           tap(() => {
-            this.listAllCustomers();
-            console.log(customer)
-          }), // Por exemplo, atualize a lista de clientes após criar um novo
+            this._snackBar.open('Cliente criado com sucesso!', 'Fechar', {
+                duration: 2000,
+            });
+            console.log('created\n' + customer)
+          }),
           catchError((error) => {
             console.error('Error creating customer:', error);
+            this._snackBar.open('Erro ao criar cliente!', 'Fechar', {
+                duration: 2000,
+            });
             return of(null);
           })
         )
       )
     )
   );
+
+  readonly updateCustomer = this.effect((request$: Observable<[string, Customer]>) => {
+    return request$.pipe(
+      switchMap((request) =>
+        this._service.updateCustomer(request[0], request[1]).pipe(
+          tapResponse((response) => {
+            this._snackBar.open('Cliente atualizado com sucesso!', 'Fechar', {
+                duration: 2000,
+            });
+            this.onCancel();
+            console.log('updated\n' + response)
+          },
+            (error: HttpErrorResponse) => {
+              this._snackBar.open('Erro ao atualizar cliente!', 'Fechar', {
+                  duration: 2000,
+              });
+            }
+          ),
+          catchError(() => {
+            // this.setErrors(new Error('Erro desconhecido.'));
+            return EMPTY;
+          })
+        )
+      )
+    )
+  });
+
+  readonly updateCustomerPf = this.effect((request$: Observable<[string, Customer]>) => {
+    return request$.pipe(
+      switchMap((request) =>
+        this._service.updateCustomerPf(request[0], request[1]).pipe(
+          tapResponse((response) => {
+              this._snackBar.open('Cliente atualizado com sucesso!', 'Fechar', {
+                duration: 2000,
+              });
+              // this.onCancel();
+            },
+            (error: HttpErrorResponse) => {
+              this._snackBar.open('Erro ao atualizar cliente!', 'Fechar', {
+                duration: 2000,
+              });
+              console.error(error)
+            }
+          ),
+          catchError(() => {
+            // this.setErrors(new Error('Erro desconhecido.'));
+            return EMPTY;
+          })
+        )
+      )
+    )
+  });
+
+  readonly updateCustomerPj = this.effect((request$: Observable<[string, Customer]>) => {
+    return request$.pipe(
+      switchMap((request) =>
+        this._service.updateCustomerPj(request[0], request[1]).pipe(
+          tapResponse((response) => {
+              this._snackBar.open('Cliente atualizado com sucesso!', 'Fechar', {
+                duration: 2000,
+              });
+              this.onCancel();
+            },
+            (error: HttpErrorResponse) => {
+              this._snackBar.open('Erro ao atualizar cliente!', 'Fechar', {
+                duration: 2000,
+              });
+              console.error(error)
+            }
+          ),
+          catchError(() => {
+            // this.setErrors(new Error('Erro desconhecido.'));
+            return EMPTY;
+          })
+        )
+      )
+    )
+  });
 
   readonly getCustomerById = this.effect<string>((customerId$) =>
     customerId$.pipe(
@@ -62,8 +151,7 @@ export class CustomerStore extends ComponentStore<CustomerState> {
         )
       )
     )
-  )
-);
+  ));
 
   readonly fetchCustomerById = this.effect<string>((id$) =>
     id$.pipe(
@@ -103,4 +191,11 @@ export class CustomerStore extends ComponentStore<CustomerState> {
     getCustomer(): Observable<Customer | undefined> {
         return this.select(state => state.customer);
     }
+
+  onCancel() {
+    this._location.back();
+      setTimeout(()=>{
+      location.reload();
+    }, 100);
+  }
 }

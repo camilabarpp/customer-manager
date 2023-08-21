@@ -7,20 +7,26 @@
     "rg": "987654321",
     "registerDate": "2023-08-01",
     "isActive": true,
-    "telephones": [
-      { "number": "11 12345678" },
-      { "number": "11 87654321" }
+    "phoneNumbers": [
+      {
+        "id": 1,
+        "number": "11 12345678"
+      },
+      {
+        "id": 2,
+        "number": "11 87654321"
+      }
     ]
   },
   {
     "id": 2,
     "name": "Empresa ABC",
-    "type": "Pessoa Jurídica",
+    "type": "PJ",
     "cnpj": "12.345.678/0001-99",
     "ie": "987654321",
     "registerDate": "2023-08-02",
     "isActive": true,
-    "telephones": [
+    "phoneNumber": [
       { "number": "11 12345678" },
       { "number": "11 87654321" }
     ]
@@ -33,7 +39,7 @@
     "rg": "123456789",
     "registerDate": "2023-08-03",
     "isActive": false,
-    "telephones": [
+    "phoneNumber": [
       { "number": "11 12345678" },
       { "number": "11 87654321" }
     ]
@@ -46,24 +52,26 @@
     "ie": "123456789",
     "registerDate": "2023-08-04",
     "isActive": false,
-    "telephones": [
+    "phoneNumber": [
       { "number": "11 12345678" },
       { "number": "11 87654321" }
     ]
   },
-    {
-        "id": 5,
-        "name": "José Pereira",
-        "type": "Pessoa Física",
-        "cpf": "456.789.123-00",
-        "rg": "123987456",
-        "registerDate": "2023-08-05",
-        "isActive": true,
-        "telephones": [
-          { "number": "11 12345678" },
-          { "number": "11 87654321" }
-        ]
-    },
+  {
+    "id": 5,
+    "name": "Matheus Oliveira",
+    "phoneNumbers": [
+      {
+        "id": 1,
+        "number": "123456789"
+      }
+    ],
+    "cnpj": "45678900",
+    "ie": "987654321",
+    "type": "PJ",
+    "registrationDate": "2023-08-17",
+    "active": true
+  },
     {
         "id": 6,
         "name": "Empresa 123",
@@ -72,7 +80,7 @@
         "ie": "123987456",
         "registerDate": "2023-08-06",
         "isActive": true,
-        "telephones": [
+        "phoneNumber": [
           { "number": "11 12345678" },
           { "number": "11 87654321" }
         ]
@@ -85,7 +93,7 @@
         "rg": "456123789",
         "registerDate": "2023-08-07",
         "isActive": false,
-        "telephones": [
+        "phoneNumbers": [
           { "number": "11 12345678" },
           { "number": "11 87654321" }
         ]
@@ -98,7 +106,7 @@
         "ie": "456123789",
         "registerDate": "2023-08-08",
         "isActive": false,
-        "telephones": [
+        "phoneNumber": [
           { "number": "11 12345678" },
           { "number": "11 87654321" }
         ]
@@ -111,7 +119,7 @@
         "rg": "789456123",
         "registerDate": "2023-08-09",
         "isActive": true,
-        "telephones": [
+        "phoneNumbers": [
           { "number": "11 12345678" },
           { "number": "11 87654321" }
         ]
@@ -124,7 +132,7 @@
         "ie": "789456123",
         "registerDate": "2023-08-10",
         "isActive": true,
-        "telephones": [
+        "phoneNumber": [
           { "number": "11 12345678" },
           { "number": "11 87654321" }
         ]
