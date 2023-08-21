@@ -1,10 +1,8 @@
-import {Location} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {CustomerStore} from "../../store/customer.store";
-import {ActivatedRoute} from "@angular/router";
+import {Router} from "@angular/router";
 import {TypeCustomer} from "../../store/model/customer.model";
-import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-customer-register',
@@ -18,9 +16,8 @@ export class CustomerRegisterComponent implements OnInit {
   constructor(
     private _store: CustomerStore,
     private _formBuilder: FormBuilder,
-    private _route: ActivatedRoute,
-    private _location: Location,
-    private _snackBar: MatSnackBar) {}
+    private _router: Router,
+) {}
 
   ngOnInit() {
     this.createForm();
@@ -71,7 +68,6 @@ export class CustomerRegisterComponent implements OnInit {
     }
   }
 
-
   get phoneNumbers() {
     return this.form.get('phoneNumbers') as FormArray;
   }
@@ -82,7 +78,7 @@ export class CustomerRegisterComponent implements OnInit {
   }
 
   onCancel() {
-    this._location.back();
+    this._router.navigate(['']);
     setTimeout(()=>{
       location.reload();
     }, 100);

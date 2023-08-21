@@ -20,13 +20,13 @@
 
           <ng-container matColumnDef="name">
             <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Nome</th>
-            <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)"
+            <td mat-cell class="mat-body-1"
                 *matCellDef="let customer">{{ customer.name }}</td>
           </ng-container>
 
           <ng-container matColumnDef="type">
             <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Tipo</th>
-            <td mat-cell class="mat-body-1" (click)="editCustomer(customer.id)"
+            <td mat-cell class="mat-body-1"
                 *matCellDef="let customer">{{ customer.type }}</td>
           </ng-container>
 

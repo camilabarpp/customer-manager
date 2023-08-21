@@ -41,6 +41,7 @@ export class CustomerSearchComponent implements OnInit {
       searchInput: ''
     });
     this.checkMobileView();
+    this._store.listAllCustomers();
   }
 
   checkMobileView() {

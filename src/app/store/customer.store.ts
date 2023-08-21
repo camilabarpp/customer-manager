@@ -1,4 +1,3 @@
-import {Location} from '@angular/common';
 import {Customer} from "./model/customer.model";
 import {Injectable} from "@angular/core";
 import {ComponentStore, tapResponse} from "@ngrx/component-store";
@@ -8,6 +7,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {ErrorDialogComponent} from "../shared/components/error-dialog/error-dialog.component";
+import {Router} from "@angular/router";
 
 export interface CustomerState {
   customer?: Customer;
@@ -21,7 +21,7 @@ export class CustomerStore extends ComponentStore<CustomerState> {
   constructor(
     private _service: CustomerService,
     private _snackBar: MatSnackBar,
-    private _location: Location,
+    private _router: Router,
     private _dialog: MatDialog,
   ) {
     super(initialState);
@@ -37,9 +37,9 @@ export class CustomerStore extends ComponentStore<CustomerState> {
         },
         (error: any) => {
           console.error(error);
-            this._dialog.open(ErrorDialogComponent, {
-              data: 'Erro ao carregar clientes!'
-            });
+          this._dialog.open(ErrorDialogComponent, {
+            data: 'Erro ao carregar clientes!'
+          });
         }
       )
     ));
@@ -179,7 +179,11 @@ export class CustomerStore extends ComponentStore<CustomerState> {
   }
 
   onCancel() {
-    this._location.back();
+    this._router.navigate(['']);
+    this.refresh();
+  }
+
+  refresh(): void {
     setTimeout(() => {
       location.reload();
     }, 100);
