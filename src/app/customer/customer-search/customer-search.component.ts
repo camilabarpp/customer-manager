@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {CustomerStore} from '../../store/customer.store';
 import {Observable} from 'rxjs';
 import {Customer} from '../../store/model/customer.model';
@@ -31,10 +31,22 @@ export class CustomerSearchComponent implements OnInit {
     }, 100);
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.checkMobileView();
+  }
+
   ngOnInit(): void {
     this.searchForm = this._formBuilder.group({
       searchInput: ''
     });
+    this.checkMobileView();
+  }
+
+  checkMobileView() {
+    if (window.innerWidth < 500) {
+      this.displayedColumns = ['name', 'telephone', 'actions'];
+    }
   }
 
   searchCustomers() {
