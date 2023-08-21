@@ -38,16 +38,19 @@
           </ng-container>
 
           <ng-container matColumnDef="actions">
-            <th mat-header-cell class="mat-body-2" *matHeaderCellDef></th>
+            <th mat-header-cell class="mat-body-2" *matHeaderCellDef>Ações</th>
             <td mat-cell class="mat-body-1" *matCellDef="let customer">
-              <button mat-icon-button matTooltip="Delete" (click)="deleteCustomer(customer.id)">
+              <button mat-icon-button matTooltip="Delete" color="warn" (click)="deleteCustomer(customer.id)">
                 <mat-icon>delete</mat-icon>
+              </button>
+              <button mat-icon-button matTooltip="Ediatr"  color="primary" (click)="editCustomer(customer.id)">
+                <mat-icon>edit</mat-icon>
               </button>
             </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row class="mat-body-1 row-table" *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-row class="mat-body-1" *matRowDef="let row; columns: displayedColumns;"></tr>
 
         </table>
         <button mat-raised-button color="primary" class="add-button" (click)="onAddCustomer()">

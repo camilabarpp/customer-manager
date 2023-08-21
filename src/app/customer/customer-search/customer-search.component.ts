@@ -45,7 +45,7 @@ export class CustomerSearchComponent implements OnInit {
 
   checkMobileView() {
     if (window.innerWidth < 500) {
-      this.displayedColumns = ['name', 'telephone', 'actions'];
+      this.displayedColumns = ['name', 'type', 'actions'];
     }
   }
 
