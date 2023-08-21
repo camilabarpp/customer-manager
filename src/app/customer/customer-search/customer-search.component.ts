@@ -4,6 +4,8 @@ import {CustomerStore} from '../../store/customer.store';
 import {Observable, pipe} from 'rxjs';
 import {Customer} from '../../store/model/customer.model';
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmationDialogComponent} from "../../shared/components/confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: 'app-customer-search',
@@ -16,7 +18,7 @@ export class CustomerSearchComponent implements OnInit {
   constructor(
     private _store: CustomerStore,
     private _router: Router,
-    private _location: Location
+    private _dialog: MatDialog,
   ) {
     this.customers$ = this._store.customers$;
   }
@@ -41,7 +43,15 @@ export class CustomerSearchComponent implements OnInit {
   }
 
   deleteCustomer(id: number) {
-    this._store.deleteCustomer(id);
-    this.refresh();
+    const dialogRef = this._dialog.open(ConfirmationDialogComponent, {
+      data: 'Tem certeza que deseja remover esse curso?',
+    });
+
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if (result) {
+        this._store.deleteCustomer(id);
+        this.refresh();
+      }
+    });
   }
 }

@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {CustomerModule} from "./customer/customer.module";
 import {HttpClientModule} from "@angular/common/http";
 import {CustomerStore} from "./store/customer.store";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {CustomerStore} from "./store/customer.store";
     AppRoutingModule,
     BrowserAnimationsModule,
     CustomerModule,
+    SharedModule,
     HttpClientModule
   ],
   providers: [CustomerStore],

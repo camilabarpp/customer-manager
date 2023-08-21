@@ -1,11 +1,13 @@
 import {Location} from '@angular/common';
 import {Customer} from "./model/customer.model";
-import {Injectable, OnDestroy} from "@angular/core";
+import {Injectable} from "@angular/core";
 import {ComponentStore, tapResponse} from "@ngrx/component-store";
-import {catchError, EMPTY, Observable, of, retry, switchMap, tap} from "rxjs";
+import {catchError, EMPTY, Observable, of, switchMap, tap} from "rxjs";
 import {CustomerService} from "../service/customer.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatDialog} from "@angular/material/dialog";
+import {ErrorDialogComponent} from "../shared/components/error-dialog/error-dialog.component";
 
 export interface CustomerState {
   customer?: Customer;
@@ -19,7 +21,8 @@ export class CustomerStore extends ComponentStore<CustomerState> {
   constructor(
     private _service: CustomerService,
     private _snackBar: MatSnackBar,
-    private _location: Location
+    private _location: Location,
+    private _dialog: MatDialog,
   ) {
     super(initialState);
   }
@@ -27,15 +30,20 @@ export class CustomerStore extends ComponentStore<CustomerState> {
   readonly customer$: Observable<Customer | undefined> = this.select(state => state.customer);
   readonly customers$: Observable<Customer[] | undefined> = this.select(state => state.customers);
 
-    readonly listAllCustomers = this.effect<void>(() =>
-        this._service.listAllCustomers.pipe(
-            tap(customerStates => {
-              this.patchState({ customers: customerStates });
-              console.log(customerStates)
-            })
-
-        )
-    );
+  readonly listAllCustomers = this.effect<void>(() =>
+    this._service.listAllCustomers.pipe(
+      tapResponse(customerStates => {
+          this.patchState({customers: customerStates});
+          console.log(customerStates)
+        },
+        (error: any) => {
+          console.error(error);
+            this._dialog.open(ErrorDialogComponent, {
+              data: error,
+            });
+        }
+      )
+    ));
 
   readonly getCustomerById = this.effect<string>((customerId$) =>
     customerId$.pipe(
@@ -43,8 +51,8 @@ export class CustomerStore extends ComponentStore<CustomerState> {
         this._service.findACustomerById(customerId).pipe(
           tapResponse((customer) => {
               this.setCustomer(customer);
-              this.setState({ customer })
-              this.patchState({ customer });
+              this.setState({customer})
+              this.patchState({customer});
               console.log(customer)
             },
             (error: any) => console.error(error)
@@ -59,13 +67,13 @@ export class CustomerStore extends ComponentStore<CustomerState> {
         this._service.createCustomer(customer).pipe(
           tap(() => {
             this._snackBar.open('Cliente criado com sucesso!', 'Fechar', {
-                duration: 5000,
+              duration: 5000,
             });
           }),
           catchError((error) => {
             console.error('Error creating customer:', error);
             this._snackBar.open('Erro ao criar cliente!', 'Fechar', {
-                duration: 5000,
+              duration: 5000,
             });
             return of(null);
           })
@@ -152,25 +160,25 @@ export class CustomerStore extends ComponentStore<CustomerState> {
     )
   });
 
-    readonly setCustomers = this.updater((state, customers: Customer[] | undefined)  => {
-        return {...state, customers};
-    });
+  readonly setCustomers = this.updater((state, customers: Customer[] | undefined) => {
+    return {...state, customers};
+  });
 
-    readonly setCustomer = this.updater((state, customer: Customer | undefined)  => {
-        return {...state, customer};
-    });
+  readonly setCustomer = this.updater((state, customer: Customer | undefined) => {
+    return {...state, customer};
+  });
 
-    getCustomers(): Observable<Customer[] | undefined> {
-        return this.select(state => state.customers);
-    }
+  getCustomers(): Observable<Customer[] | undefined> {
+    return this.select(state => state.customers);
+  }
 
-    getCustomer(): Observable<Customer | undefined> {
-        return this.select(state => state.customer);
-    }
+  getCustomer(): Observable<Customer | undefined> {
+    return this.select(state => state.customer);
+  }
 
   onCancel() {
     this._location.back();
-      setTimeout(()=>{
+    setTimeout(() => {
       location.reload();
     }, 100);
   }

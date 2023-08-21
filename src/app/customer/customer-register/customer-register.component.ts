@@ -81,10 +81,6 @@ export class CustomerRegisterComponent implements OnInit {
     this.phoneNumbers.push(control);
   }
 
-  removePhoneNumber(index: number) {
-    this.phoneNumbers.removeAt(index);
-  }
-
   onCancel() {
     this._location.back();
     setTimeout(()=>{
